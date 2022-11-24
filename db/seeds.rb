@@ -4,6 +4,16 @@ puts "🌱 Seeding spices..."
 
 streaming_services = ["Disney+", "Netflix", "Amazon Prime"]
 genres = ["Action", "Horror", "Drama", "Thriller", "Western", "Sci-Fi", "Comedy", "Crime", "Romance", "Adventure"]
+
+
+20.times do
+
+     User.create(
+        name: Faker::Name.name
+    )
+
+end
+
 50.times do
 
     movie = Movie.create(
@@ -13,11 +23,18 @@ genres = ["Action", "Horror", "Drama", "Thriller", "Western", "Sci-Fi", "Comedy"
         release_date: Faker::Date.between(from: 80.years.ago, to: Date.today)
     )
 
+
     rand(1..5).times do
+        first_user = User.first
+        last_user = User.last
+
+        user = User.find(rand(first_user.id..last_user.id))
+
         Review.create(
             rating: rand(1..5),
             comment: Faker::Lorem.sentence,
-            movie_id: movie.id
+            movie_id: movie.id,
+            user_id: user.id
         )
     end
 end
