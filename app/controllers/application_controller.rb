@@ -7,12 +7,17 @@ class ApplicationController < Sinatra::Base
     movies.to_json
   end
 
-  # Returns a movie's review and relevant user
-  
+  # Returns a movie's reviews and relevant users
+
   get "/movies/:id/reviews" do 
     movie = Movie.find(params[:id])
     reviews = movie.reviews
-    users = reviews.map{|review| review.user}
+    users = movie.users
+
+    # Work out the Average rating of all reviews
+    average_rating = reviews.sum(:rating) / reviews.count.to_f
+
+    # Make an array of hashes of each movie's review with its user
     reviews_with_user = reviews.map do |review|
       index = reviews.index(review)
       user = users[index]
@@ -21,7 +26,12 @@ class ApplicationController < Sinatra::Base
         user: user
       }
     end
-    reviews_with_user.to_json
+
+    # Add the average rating
+
+    reviews_with_user_and_average_rating = { return_hash: reviews_with_user, average_rating: average_rating}
+
+    reviews_with_user_and_average_rating.to_json
   end
 
 end
