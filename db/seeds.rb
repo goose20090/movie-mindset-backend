@@ -9,7 +9,8 @@ genres = ["Action", "Horror", "Drama", "Thriller", "Western", "Sci-Fi", "Comedy"
 20.times do
 
      User.create(
-        name: Faker::Name.name
+        name: Faker::Name.name,
+        avatar: Faker::Avatar.image
     )
 
 end

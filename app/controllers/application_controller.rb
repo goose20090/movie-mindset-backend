@@ -20,4 +20,9 @@ class ApplicationController < Sinatra::Base
     users.to_json
   end
 
+  get "/users/:id/reviews" do 
+    userReviews = User.find(params[:id]).reviews
+    userReviews.to_json
+  end
+
 end
