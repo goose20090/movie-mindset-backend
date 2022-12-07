@@ -4,7 +4,7 @@ class ApplicationController < Sinatra::Base
   # Returns a JSON response of all instances of the Movie class
   get "/movies" do
     movies = Movie.all
-    movies.to_json
+    movies.to_json(include:{reviews: {include: :user}})
   end
 
   # Returns a movie's reviews and relevant users, with that movie's average rating
@@ -17,12 +17,13 @@ class ApplicationController < Sinatra::Base
 
   get "/users" do
     users = User.all
-    users.to_json
+    users.to_json(include:{reviews: {include: :movie}})
   end
 
   get "/users/:id/reviews" do 
-    userReviews = User.find(params[:id]).reviews
-    userReviews.to_json
+    user = User.find(params[:id])
+    return_hash = user.get_reviews_with_movie
+    return_hash.to_json
   end
 
 end
