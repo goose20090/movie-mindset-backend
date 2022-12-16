@@ -14,6 +14,15 @@ class ApplicationController < Sinatra::Base
     users.to_json(include:{reviews: {include: :movie}})
   end
 
+  post "/reviews" do
+    review = Review.create(
+      comment: params[:comment],
+      rating: params[:rating],
+      movie_id: params[:movie_id],
+      user_id: params[:user_id]
+    )
+    review.to_json(include: [:user, :movie])
+  end
   # Updates a specific review's rating and comment
   patch "/reviews/:id" do 
     review = Review.find(params[:id])
