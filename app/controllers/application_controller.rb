@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
       comment: params[:comment],
       rating: params[:rating]
     )
-    review.to_json
+    review.to_json(include: :user)
   end
 
 end
