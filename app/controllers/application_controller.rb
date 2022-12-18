@@ -14,6 +14,14 @@ class ApplicationController < Sinatra::Base
     users.to_json(include:{reviews: {include: :movie}})
   end
 
+  post "/users" do
+    user = User.create(
+      name: params[:name],
+      avatar: Faker::Avatar.image,
+    )
+    user.to_json(include:{reviews: {include: :movie}})
+  end
+
   post "/reviews" do
     review = Review.create(
       comment: params[:comment],
