@@ -14,5 +14,6 @@ use Rack::JSONBodyParser
 # Our application
 run ApplicationController
 
-# use MoviesController
-# use UsersController
+use MoviesController
+use UsersController
+use ReviewsController
