@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
         review.to_json(include: [:user, :movie])
     end
 
-  # Updates a specific review's rating and comment
+    # Updates a specific review's rating and comment
     patch "/reviews/:id" do 
         review = Review.find(params[:id])
         review.update(
@@ -19,5 +19,12 @@ class ReviewsController < ApplicationController
         rating: params[:rating]
         )
         review.to_json(include: :user)
+    end
+
+    # Deletes a specific review
+    delete '/reviews/:id' do
+        review = Review.find(params[:id])
+        review.destroy
+        review.to_json
     end
 end
