@@ -9,6 +9,8 @@ genres = ["Action", "Horror", "Drama", "Thriller", "Western", "Sci-Fi", "Comedy"
         movies.to_json(include:{reviews: {include: :user}})
     end
 
+    # Recieves user-submitted title of new movie and creates new instance with auto-generated info
+    
     post "/movies" do
         movie = Movie.create(
         title: params[:title],

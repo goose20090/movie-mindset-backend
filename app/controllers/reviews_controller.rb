@@ -18,13 +18,13 @@ class ReviewsController < ApplicationController
         comment: params[:comment],
         rating: params[:rating]
         )
-        review.to_json(include: :user)
+        review.to_json(include: [:user, :movie])
     end
 
     # Deletes a specific review
     delete '/reviews/:id' do
         review = Review.find(params[:id])
         review.destroy
-        review.to_json
+        review.to_json(include: :movie)
     end
 end
