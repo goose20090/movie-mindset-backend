@@ -9,7 +9,7 @@ For an outline of the user experience, please visit the repository for the [this
 
 1) *Use Active Record to interact with a database.*
 
-    As can be seen in the controllers for this app, the models in the project use Active Record, combined with the Sinatra Gem to interact with its databases
+    - As can be seen in the controllers for this app, the models in the project use Active Record, combined with the Sinatra Gem to interact with its databases
 
 
 2)  *Have at least two models with a one-to-many relationship.*
